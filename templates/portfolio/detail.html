@@ -1,0 +1,40 @@
+{% extends 'portfolio/index.html' %}
+
+{% load static %}
+
+{% block title %}Orbicx | {{ project.title }}{% endblock %}
+
+{% block link %}<link rel="stylesheet" href="{% static 'css/flexslider.css' %}">{% endblock %}
+
+{% block hero %}Portfolio/{{ project.title }}{% endblock %}
+
+{% block content %}
+    <section id="portfolio">
+		<div class="row project-single">
+			<div class="col-md-8">
+				<div class="flexslider">
+						<ul class="slides">
+							<li>
+								<img src="{{ main_image.url }}" alt="{{ project.title }}"></li>
+							{% if images %}{% for image in images %}
+							<li>
+								<img src="{{ image.image.url }}" alt="{{ image.name }}"></li>
+							{% endfor %}{% endif %}
+						</ul>
+				</div>
+			</div> <!-- /.col-md-8 -->
+			<div class="col-md-4">
+				<div class="project-info">
+					<span class="subtitle">Subtitle Goes here</span>
+					<h3 class="project-title">{{ project.title }}</h3>
+					<p class="description">{{ project.description }}</p>
+					<ul class="meta-post">
+						<li><span>Date:</span>{{ project.start_date }}</li>
+						<li><span>Skills:</span>{{ project.technology }}</li>
+						<li><span>URL:</span>{% if project.url %}<a href="{{ project.url }}">{{ project.url }}</a>{% else %}Nil{% endif %}</li>
+					</ul>
+				</div> <!-- /.project-info -->
+			</div> <!-- /.col-md-4 -->
+		</div> <!-- /.row -->
+	</section> <!-- /.container -->
+{% endblock %}

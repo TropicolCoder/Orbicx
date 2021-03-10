@@ -1,0 +1,637 @@
+{% load static %}
+<!--[if IE 8 ]>
+<html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Orbicx | Graphics and Web design</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+
+    <!-- favicons
+     ================================================== -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+
+</head>
+
+<body>
+
+<!-- header
+================================================== -->
+<header id="main-header">
+
+    <div class="row">
+
+        <div class="logo">
+            <a href="{% url 'orbicx:home' %}">Orbicx</a>
+        </div>
+
+        <nav id="nav-wrap">
+
+            <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+                <span class="menu-icon">Menu</span>
+            </a>
+            <a class="mobile-btn" href="#" title="Hide navigation">
+                <span class="menu-icon">Menu</span>
+            </a>
+
+            <ul id="nav" class="nav">
+                <li class="current"><a class="smoothscroll" href="#hero">Home.</a></li>
+                <li><a href="{% url 'orbicx:portfolio' %}">Portfolio.</a></li>
+                <li><a class="smoothscroll" href="#services">Services.</a></li>
+                <li><a class="smoothscroll" href="#about">About.</a></li>
+                <li><a class="smoothscroll" href="#contact">Contact.</a></li>
+            </ul> <!-- end #nav -->
+
+        </nav> <!-- end #nav-wrap -->
+
+        <ul class="header-social">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/orbicxdesigns/" target="_blank"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li><a href="https://twitter.com/orbicxdesigns" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+
+    </div>
+
+</header> <!-- end header -->
+
+
+<!-- homepage hero
+================================================== -->
+<section id="hero">
+
+    <div class="row hero-content">
+
+        <div class="twelve columns hero-container">
+
+            <!-- hero-slider start-->
+            <div id="hero-slider" class="flexslider">
+
+                <ul class="slides">
+
+                    <!-- slide -->
+                    <li>
+                        <div class="flex-caption">
+                            <h1 class="">Welcome to <span>Orbicx</span>. We create awesome and stunning
+                                digital solutions.
+                            </h1>
+
+                            <h3 class=""></h3>
+                        </div>
+                    </li>
+
+                    <!-- slide -->
+                    <li>
+                        <div class="flex-caption">
+                            <h1 class="">We are a small design studio dedicated to build great digital
+                                products.</h1>
+
+                            <h3 class=""></h3>
+                        </div>
+                    </li>
+
+                    <!-- slide -->
+                    <li>
+                        <div class="flex-caption">
+                            <h1 class="">Take a look at some of <a class="smoothscroll" href="#portfolio"
+                                                                   title="portfolio">our works</a> or
+                                <a class="smoothscroll" href="#contact" title="contact us">get in touch</a> to discuss
+                                how we can help you.</h1>
+
+                            <h3 class=""></h3>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div> <!-- end hero-slider -->
+
+        </div> <!-- end twelve columns-->
+
+    </div> <!-- end row -->
+
+    <div id="more">
+        <a class="smoothscroll" href="#services">More About Us<i class="fa fa-angle-down"></i></a>
+    </div>
+
+</section> <!-- end homepage hero -->
+
+
+<!-- portfolio
+================================================== -->
+
+<section id="portfolio">
+<br>
+<br>
+<br>
+    <div class="row section-head">
+
+        <div class="twelve columns">
+
+            <h1>Our Portfolio<span>.</span></h1>
+
+            <hr/>
+
+            <p>Here is some of our creative works</p>
+
+            <a href="{% url 'orbicx:portfolio' %}"><button style="color: black">View more ></button></a>
+
+        </div>
+
+    </div> <!-- end section-head -->
+
+    <div class="row items">
+        <!-- portfolio-wrapper -->
+        <div id="portfolio-wrapper" class="bgrid-fourth s-bgrid-third tab-bgrid-half">
+{% for project in projects %}
+            <div class="bgrid folio-item">
+                <div class="item-wrap">
+                    <a href="#modal-0{{ project.id }}">
+                        <img src="{% if project.main_image %}{{ project.main_image.url }}{% endif %}" alt="{{ project.title }}">
+                        <div class="overlay"></div>
+                        <div class="portfolio-item-meta">
+                            <h5>{{ project.title }}</h5>
+                            <p>{{ project.category }}</p>
+                        </div>
+                        <div class="link-icon"><i class="fa fa-plus"></i></div>
+                    </a>
+                </div>
+            </div> <!-- item end -->
+{% endfor %}
+{% for project in projects %}
+            <div id="modal-0{{ project.id }}" class="popup-modal mfp-hide">
+
+                <div class="media">
+                    <img src="{% if project.main_image %}{{ project.main_image.url }}{% endif %}" alt=""/>
+                </div>
+
+                <div class="description-box">
+                    <h4>{{ project.title }}</h4>
+                    <p>{{ project.description }}</p>
+                    <span class="categories">{{ project.category }}</span>
+                </div>
+
+                <div class="link-box group">
+                    <a href="{{ project.get_absolute_url }}">Details</a>
+                    <a href="#" class="popup-modal-dismiss">Close</a>
+                </div>
+
+            </div><!-- modal-01 end -->
+{% endfor %}
+
+        </div> <!-- end portfolio-wrapper -->
+    </div>  <!-- end row -->
+
+</section> <!-- end portfolio -->
+
+
+<!-- Services Section
+================================================== -->
+<section id="services">
+
+    <div class="row section-head">
+
+        <div class="twelve columns">
+
+            <h1>Our Awesome Services<span>.</span></h1>
+
+            <hr/>
+
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                enim ipsam
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+            </p>
+
+        </div>
+
+    </div> <!-- end section-head -->
+
+    <div class="row mobile-no-padding">
+
+        <div class="service-list bgrid-third s-bgrid-half tab-bgrid-whole group">
+
+            <div class="bgrid">
+
+                <h3>Marketing.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+            <div class="bgrid">
+
+                <h3>Videography.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+            <div class="bgrid">
+
+                <h3>Photography.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+            <div class="bgrid">
+
+                <h3>Branding.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+            <div class="bgrid">
+
+                <h3>Web Design.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+            <div class="bgrid">
+
+                <h3>Web Development.</h3>
+
+                <div class="service-content">
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                        fugit.
+                    </p>
+                </div>
+
+            </div> <!-- end bgrid -->
+
+        </div> <!-- end service-list -->
+
+    </div> <!-- end row -->
+
+</section> <!-- end services -->
+
+
+<!-- About Section
+================================================== -->
+<section id="about">
+
+    <div class="row section-head">
+
+        <div class="twelve columns">
+
+            <h1>Who Are We<span>.</span></h1>
+
+            <hr/>
+
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                enim ipsam
+                voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+            </p>
+
+        </div> <!-- end section-head -->
+
+    </div>
+
+    <div class="row mobile-no-padding">
+
+        <div class="process bgrid-half tab-bgrid-whole group">
+
+            <div class="bgrid">
+
+                <h3>Our Process.</h3>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                </p>
+
+            </div>
+
+            <div class="bgrid">
+
+                <h3>Our Approach.</h3>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                </p>
+
+            </div>
+
+            <div class="bgrid">
+
+                <h3>Our Goal.</h3>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                </p>
+
+            </div>
+
+            <div class="bgrid">
+
+                <h3>Our Mission.</h3>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                </p>
+
+            </div>
+
+        </div> <!-- end process -->
+
+    </div> <!-- end row -->
+
+
+    <div class="row team section-head">
+
+        <div class="twelve columns">
+
+            <h1>Meet Our Team<span>.</span></h1>
+
+            <hr/>
+
+        </div>
+
+    </div> <!-- end section-head -->
+
+    <div class="row">
+
+        <div id="team-wrapper" class="bgrid-third s-bgrid-half tab-bgrid-half mob-bgrid-whole group">
+            {% for member in members %}
+            <div class="bgrid member">
+
+                <div class="member-pic">
+                    <img src="{% if member.image %}{{ member.image.url }}{% endif %}" alt="{{ member.name }}"/>
+                    <div class="mask"></div>
+                </div>
+                <div class="member-name">
+                    <h3>{{ member.name }}</h3>
+                    <span>{{ member.role }}</span>
+                </div>
+
+                <p>{{ member.introduction }}</p>
+
+                <ul class="member-social">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                </ul>
+
+            </div> <!-- end member -->
+            {% endfor %}
+
+
+        </div> <!-- end team-wrapper -->
+
+    </div> <!-- end row -->
+
+</section>
+
+    <!-- Testimonials Section
+    ================================================== -->
+    <section id="testimonials">
+
+        <div class="row content flex-container">
+
+            <div id="testimonial-slider" class="flexslider">
+
+                <ul class="slides">
+                    <li>
+                        <p>Your work is going to fill a large part of your life, and the only way to be truly satisfied
+                            is
+                            to do what you believe is great work. And the only way to do great work is to love what you
+                            do.
+                            If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart,
+                            you'll know when you find it.
+                        </p>
+
+                        <div class="testimonial-author">
+                            <img src="images/avatars/avatar-1.jpg" alt="Author image">
+                            <div class="author-info">
+                                Steve Jobs
+                                <span class="position">CEO, Apple.</span>
+                            </div>
+                        </div>
+                    </li> <!-- end slide -->
+
+                    <li>
+                        <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+                            Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                            nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="images/avatars/avatar-2.jpg" alt="Author image">
+                            <div class="author-info">
+                                John Doe
+                                <span>CEO, ABC Corp.</span>
+                            </div>
+                        </div>
+                    </li> <!-- end slide -->
+
+                </ul> <!-- end slides -->
+
+            </div> <!-- end flexslider -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- end testimonials section -->
+
+
+    <!-- contact
+    ================================================== -->
+    <section id="contact">
+
+        <div class="row section-head">
+
+            <div class="twelve columns">
+
+                <h1>Get In Touch With Us<span>.</span></h1>
+
+                <hr/>
+
+            </div>
+
+        </div> <!-- end section-head -->
+
+        <div class="row">
+
+            <div id="contact-form" class="six columns tab-whole left">
+
+                <!-- form -->
+                <form name="contactForm" id="contactForm" method="post" action="">
+                    <fieldset>
+
+                        <div class="group">
+                            <input name="contactName" type="text" id="contactName" placeholder="Name" value=""
+                                   minLength="2" required/>
+                        </div>
+                        <div>
+                            <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value=""
+                                   required/>
+                        </div>
+                        <div>
+                            <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject"
+                                   value=""/>
+                        </div>
+                        <div>
+                            <textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10"
+                                      cols="50" required></textarea>
+                        </div>
+                        <div>
+                            <button class="submitform">Submit</button>
+                            <div id="submit-loader">
+                                <div class="text-loader">Sending...</div>
+                                <div class="s-loader">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form> <!-- Form End -->
+
+                <!-- contact-warning -->
+                <div id="message-warning"></div>
+                <!-- contact-success -->
+                <div id="message-success">
+                    <i class="icon-ok"></i>Your message was sent, thank you!<br/>
+                </div>
+
+            </div>
+
+            <div class="six columns tab-whole right">
+
+                <h3>Contact Numbers:</h3>
+                <p>Phone: +234 814 520 4485<br>
+                    Mobile: +234 813 866 6709<br>
+                </p>
+
+                <h3>Social Links:</h3>
+
+            </div>
+
+        </div> <!-- end row -->
+
+    </section>  <!-- end contact -->
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer>
+
+        <div class="row">
+
+            <div class="twelve columns content group">
+
+                <ul class="social-links">
+                    <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                    <li><a href="https://www.instagram.com/orbicxdesigns/"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://www.twitter.com/orbicxdesigns/"><i class="fa fa-twitter-square"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                </ul>
+
+                <hr/>
+
+                <div class="info">
+
+                    <div class="footer-logo"></div>
+
+                </div>
+
+            </div>
+
+            <ul class="copyright">
+                <li>&copy; Copyright 2021 Orbicx.</li>
+                <li>Designed by <a href="http://gitshowcase.com/TropicolCoder">TropicolCoder</a>.</li>
+            </ul>
+
+            <div id="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#hero">Back to Top<i class="fa fa-angle-up"></i></a>
+            </div>
+
+        </div> <!-- end row -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/jquery.fittext.js' %}"></script>
+    <script src="{% static 'js/jquery.placeholder.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
